@@ -13,9 +13,10 @@ class AuthorsController extends Controller
     public function index()
     {
         //
-        $no = 1;
-        $authors = Authors::all();
-        return view("authors.index", compact("authors", 'no'));
+        $penulis = Authors::all();
+        $no=1;
+        return view('authors.index',compact('penulis', 'no'));
+        
     }
 
     /**
@@ -24,7 +25,7 @@ class AuthorsController extends Controller
     public function create()
     {
         //
-        return view("authors.create");
+        return view('authors.create');
     }
 
     /**
@@ -34,26 +35,27 @@ class AuthorsController extends Controller
     {
         //
         $validasi = $request->validate([
-            "name_author"=> "required|max:255",
-            "age"=> "required",
-            "alamat" => "required"
+            "name_author"=>"required|max:255",
+            "age"=>"required",
+            "alamat"=>"required|max:255"
         ]);
-        
-        if (!$validasi) {
-            return redirect()->route("penulis.index")->with("error");
-        }
 
+        if(!$validasi){
+            return redirect()->route('penulis.index')->with('error');
+        }
+        
         Authors::create($validasi);
-        return redirect()->route("penulis.index")->with("success");
+        return redirect()->route('penulis.index')->with('sucsess');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Authors $authors, $id)
     {
-        $author = Authors::find($id);
-        return view("authors.show", compact("author"));
+        //
+        $penulis = Authors::find($id);
+        return view('authors.show',compact('penulis', $id));
     }
 
     /**
@@ -75,8 +77,16 @@ class AuthorsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Authors $authors)
+    public function destroy($id)
     {
         //
+        $delete=Authors::find($id);
+
+        if($delete){
+            return redirect()->route('penulis.index')->with('error');
+        }
+
+        $delete->delete();
+        return redirect()->route('penulis.index')->with('success');
     }
 }

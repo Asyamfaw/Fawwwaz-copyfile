@@ -21,4 +21,5 @@ Route::get('/author', [AuthorsController::class,'index'])->name('penulis.index')
 Route::get('/author/create', [AuthorsController::class,'create'])->name('penulis.create');
 Route::post('/author/create', [AuthorsController::class , 'store'])->name('penulis.store');
 Route::get('/author/show{id}', [AuthorsController::class , 'show'])->name('penulis.show');
+Route::delete('/author/delete{id}', [AuthorsController::class , 'destroy'])->name('penulis.destroy');
 // END Route author

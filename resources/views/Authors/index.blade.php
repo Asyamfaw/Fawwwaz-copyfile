@@ -37,7 +37,7 @@
                     <td>
                         <a href="{{ route('penulis.show', $author->id) }}">Detail</a>
                         <a href="">Edit</a>
-                        <form action="" method="POST">
+                        <form action="{{ route('penulis.destroy', $author->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">DELETE</button>
