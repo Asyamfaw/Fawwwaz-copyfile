@@ -28,19 +28,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($authors as $author)
+            @foreach ($penulis as $author)
                 <tr class="justify-center text-center">
                     <td>{{ $no++ }}</td>
                     <td>{{ $author->name_author }}</td>
                     <td>{{ $author->age }}</td>
                     <td>{{ $author->alamat }}</td>
                     <td>
-                        <a href="{{ route('penulis.show', $author->id) }}">Detail</a>
-                        <a href="">Edit</a>
-                        <form action="{{ route('penulis.destroy', $author->id) }}" method="POST">
+                        <a href="{{ route('penulis.show', $author->id) }}" class="text-blue-400">Detail</a><br>
+                        <a href="{{ route('penulis.edit', $author->id ) }}" class="text-green-500">Edit</a>
+                        <form action="{{ route('penulis.destroy', $author->id) }}" class="text-red-500" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">DELETE</button>
+                            <button type="submit" onclick="">DELETE</button>
                         </form>
                     </td>
                 </tr>

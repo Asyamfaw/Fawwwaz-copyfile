@@ -2,6 +2,16 @@
 
 @section('content')
     <h1>Halaman Create Genre</h1>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "Success",
+                text: "{{ session('success') }}",
+                icon: "success"
+            });
+        </script>
+
+    @endif
     <form method="POST" action="{{ route('genre.store') }}" class="max-w-md mx-auto">
       @csrf
   <div class="relative z-0 w-full mb-5 group">

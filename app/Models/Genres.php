@@ -12,4 +12,9 @@ class Genres extends Model
     protected $fillable = [
         "name_genres"
     ];
+
+    public function books()
+    {
+        return $this->hasMany(Books::class, 'genre_id');
+    }
 }

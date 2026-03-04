@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container mx-auto">
+    <h1 class="mb-5">Welcome to Edit Author</h1>
     <form action="{{ route("penulis.store") }}" method="POST">
         @csrf
         <div>

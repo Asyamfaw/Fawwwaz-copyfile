@@ -22,6 +22,7 @@ class AuthorsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    
     public function create()
     {
         //
@@ -55,23 +56,37 @@ class AuthorsController extends Controller
     {
         //
         $penulis = Authors::find($id);
-        return view('authors.show',compact('penulis', $id));
+        return view('authors.show',compact('penulis'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Authors $authors)
+    public function edit($id)
     {
         //
+        $edit = Authors::find($id);
+        return view('authors.edit', compact('edit'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Authors $authors)
+    public function update(Request $request,$id)
     {
         //
+        $update = Authors::find($id);
+        if(!$update){
+            return redirect()->route('penulis.index')->with('error');
+        }
+
+        $update->update([
+            "name_author" => $request->name_author,
+            "age" => $request->age,
+            "alamat" => $request->alamat
+        ]);
+
+        return redirect()->route('penulis.index')->with('succes');
     }
 
     /**
@@ -82,7 +97,7 @@ class AuthorsController extends Controller
         //
         $delete=Authors::find($id);
 
-        if($delete){
+        if(!$id){
             return redirect()->route('penulis.index')->with('error');
         }
 

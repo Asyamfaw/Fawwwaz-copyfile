@@ -41,7 +41,7 @@ class GenresController extends Controller
         }
 
         Genres::create($genres);
-        return redirect()->route("genre.index");
+        return redirect()->route("genre.index")->with('success', 'berhasil menambah genre');
     }
 
     /**
@@ -74,7 +74,7 @@ class GenresController extends Controller
 
         $genres->update($request->all());
 
-        return redirect()->route("genre.index")->with("success");
+        return redirect()->route("genre.index")->with("success", 'berhasil update genre');
     }
 
     /**
