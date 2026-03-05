@@ -86,7 +86,7 @@ class AuthorsController extends Controller
             "alamat" => $request->alamat
         ]);
 
-        return redirect()->route('penulis.index')->with('succes');
+        return redirect()->route('penulis.index')->with('success');
     }
 
     /**

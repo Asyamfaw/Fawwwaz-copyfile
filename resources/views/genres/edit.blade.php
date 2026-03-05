@@ -1,28 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Halaman Create Genre</h1>
+
     @if (session('success'))
         <script>
-            Swal.fire({
-                title: "Success",
-                text: "{{ session('success') }}",
-                icon: "success"
-            });
+            Swal.fire({ title: "Success", text: "{{ session('success') }}", icon: "success" });
         </script>
     @endif
-    <form method="POST" action="{{ route('genre.update', $edit->id) }}" class="max-w-md mx-auto">
-        @method("PUT")
-        @csrf
-        <div class="relative z-0 w-full mb-5 group">
-            <input type="text" name="name_genres" value="{{ $edit->name_genres }}"
-                class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
-                required />
-            <label for="name_genre"
-                class="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Input
-                Genre</label>
+
+    <div class="min-h-[80vh] flex flex-col items-center justify-center">
+
+        {{-- Header --}}
+        <div class="mb-6 text-center">
+            <h1 class="text-xl font-bold text-white">Edit Genre</h1>
+            <p class="text-slate-400 text-sm mt-0.5">Ubah nama genre yang sudah ada</p>
         </div>
-        <button type="submit"
-            class="text-black bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
-    </form>
+
+        {{-- Card Form --}}
+        <div class="bg-slate-900 border border-slate-700/50 rounded-2xl px-8 py-8 w-full max-w-md">
+            <form method="POST" action="{{ route('genre.update', $edit->id) }}" class="space-y-5">
+                @method("PUT")
+                @csrf
+
+                <div>
+                    <label for="name_genres" class="block text-sm font-medium text-slate-300 mb-1.5">Nama Genre</label>
+                    <input
+                        type="text"
+                        name="name_genres"
+                        id="name_genres"
+                        value="{{ $edit->name_genres }}"
+                        required
+                        class="w-full bg-slate-800 border border-slate-700 text-white placeholder-slate-500 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition"
+                    />
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition">
+                        Simpan Perubahan
+                    </button>
+                    <a href="{{ route('genre.index') }}" class="text-sm text-slate-400 hover:text-white transition px-5 py-2.5 rounded-xl hover:bg-slate-800">
+                        Batal
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
 @endsection

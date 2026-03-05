@@ -1,84 +1,90 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-6xl mx-auto">
-        <!-- Breadcrumb (optional) -->
-        <div class="mb-4 text-sm text-gray-500">
-            <span>Home</span>
-            <span class="mx-2">/</span>
-            <span>Books</span>
-            <span class="mx-2">/</span>
-            <span class="text-gray-700 font-medium">{{ $detail->judul }}</span>
+
+    <div class="max-w-5xl mx-auto">
+
+        {{-- Breadcrumb --}}
+        <div class="mb-6 text-sm text-slate-500 flex items-center gap-2">
+            <a href="{{ route('home') }}" class="hover:text-slate-300 transition">Home</a>
+            <span>/</span>
+            <a href="{{ route('books.index') }}" class="hover:text-slate-300 transition">Books</a>
+            <span>/</span>
+            <span class="text-slate-300 font-medium">{{ $detail->judul }}</span>
         </div>
 
-        <!-- Main content with cover left, details right -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        {{-- Main Card --}}
+        <div class="bg-slate-900 border border-slate-700/50 rounded-2xl overflow-hidden">
             <div class="flex flex-col md:flex-row">
-                <!-- Left: Cover Image -->
-                <div class="md:w-2/5 bg-gray-100 p-8 flex items-center justify-center">
-                    <div class="relative max-w-sm w-full">
-                        <img src="{{ asset('storage/'.$detail->image) }}" 
-                             class="w-full h-auto rounded-lg shadow-2xl border border-gray-200" 
-                             alt="Sampul Buku">
-                        
-                        <!-- Genre badge on image -->
-                        <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-purple-700 text-xs font-semibold px-3 py-1.5 rounded-full shadow-md">
+
+                {{-- Left: Cover --}}
+                <div class="md:w-2/5 bg-slate-800/50 p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-slate-700/50">
+                    <div class="relative w-full max-w-xs">
+                        <img
+                            src="{{ asset('storage/'.$detail->image) }}"
+                            alt="Sampul Buku"
+                            class="w-full h-auto rounded-xl shadow-2xl border border-slate-700"
+                        >
+                        <span class="absolute top-3 right-3 bg-emerald-500/90 text-white text-xs font-semibold px-3 py-1 rounded-lg">
                             {{ $detail->genre->name_genres }}
                         </span>
                     </div>
                 </div>
 
-                <!-- Right: Book Details -->
-                <div class="md:w-3/5 p-8">
-                    <!-- Title -->
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $detail->judul }}</h1>
-                    
-                    <!-- Author -->
-                    <p class="text-lg text-gray-600 mb-4">
-                        by <span class="font-semibold text-indigo-600">{{ $detail->author->name_author }}</span>
-                    </p>
+                {{-- Right: Details --}}
+                <div class="md:w-3/5 p-8 flex flex-col">
 
-                    <!-- Year & Badges -->
+                    {{-- Title & Author --}}
+                    <div class="mb-5">
+                        <h1 class="text-2xl font-bold text-white leading-snug">{{ $detail->judul }}</h1>
+                        <p class="text-slate-400 mt-1 text-sm">
+                            by <span class="text-emerald-400 font-semibold">{{ $detail->author->name_author }}</span>
+                        </p>
+                    </div>
+
+                    {{-- Badges --}}
                     <div class="flex items-center gap-3 mb-6">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium">
+                        <span class="bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium px-3 py-1 rounded-lg">
                             {{ $detail->tahun_terbit }}
                         </span>
-                        <span class="text-gray-400">•</span>
-                        <span class="text-sm text-gray-500">Age {{ $detail->author->age }} years</span>
+                        <span class="text-slate-600">•</span>
+                        <span class="text-slate-400 text-xs">Age {{ $detail->author->age }} years</span>
                     </div>
 
-                    <!-- Synopsis -->
+                    {{-- Synopsis --}}
                     <div class="mb-6">
-                        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Sinopsis</h2>
-                        <p class="text-gray-700 leading-relaxed">{{ $detail->sinopsis }}</p>
+                        <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Sinopsis</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed">{{ $detail->sinopsis }}</p>
                     </div>
 
-                    <!-- Author Info -->
-                    <div class="border-t border-gray-100 pt-6">
-                        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">About the Author</h2>
-                        <div class="bg-gray-50 rounded-lg p-4">
-                            <p class="text-gray-700">
-                                <span class="font-medium">{{ $detail->author->name_author }}</span> 
-                                <span class="text-gray-500">({{ $detail->author->age }} years old)</span>
+                    {{-- Author Info --}}
+                    <div class="border-t border-slate-700/50 pt-5 mb-6">
+                        <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">About the Author</h2>
+                        <div class="bg-slate-800 border border-slate-700/50 rounded-xl p-4 space-y-1.5">
+                            <p class="text-white text-sm font-medium">
+                                {{ $detail->author->name_author }}
+                                <span class="text-slate-400 font-normal">({{ $detail->author->age }} years old)</span>
                             </p>
-                            <p class="text-gray-600 text-sm mt-1">
-                                <span class="inline-block w-16 text-gray-400">Address:</span> 
+                            <p class="text-slate-400 text-sm">
+                                <span class="text-slate-500 w-16 inline-block">Address:</span>
                                 {{ $detail->author->alamat }}
                             </p>
                         </div>
                     </div>
 
-                    <!-- Action Buttons -->
-                    <div class="mt-8 flex gap-3">
-                        <a href="https://youtu.be/Aq5WXmQQooo?si=oJFJKOBhi7cl8hDO" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-lg text-center transition-colors duration-200 shadow-md">
+                    {{-- Action Buttons --}}
+                    <div class="flex gap-3 mt-auto">
+                        <a href="https://youtu.be/Aq5WXmQQooo?si=oJFJKOBhi7cl8hDO" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold text-sm py-2.5 px-4 rounded-xl text-center transition">
                             Borrow Book
                         </a>
-                        <a href="{{ route('books.index') }}" class="flex-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-lg text-center transition-colors duration-200">
-                            Back
+                        <a href="{{ route('home') }}" class="flex-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white font-semibold text-sm py-2.5 px-4 rounded-xl text-center transition">
+                            Kembali
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+
 @endsection

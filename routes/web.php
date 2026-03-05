@@ -30,6 +30,7 @@ Route::delete('/genre/delete/{id}',[GenresController::class,'destroy'])->name('g
 
 Route::middleware('auth')->group(function () {
 // Route author
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/author', [AuthorsController::class,'index'])->name('penulis.index');
 Route::get('/author/create', [AuthorsController::class,'create'])->name('penulis.create');
 Route::post('/author/create', [AuthorsController::class , 'store'])->name('penulis.store');
@@ -53,4 +54,3 @@ Route::put( '/books/update/{id}', [BooksController::class,'update'])->name(name:
 
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');

@@ -26,7 +26,7 @@ class BooksController extends Controller
     public function store(Request $request){
         $books = $request->validate([
             'judul' => 'required|max:255',
-            'sinopsis' => 'required',
+            'sinopsis' => 'required|max:255',
             'tahun_terbit' => 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'genre_id' => 'required',
@@ -62,7 +62,6 @@ class BooksController extends Controller
         
         if($delete->image && Storage::disk('public')->exists($delete->image)){
             Storage::disk('public')->delete($delete->image);
-            return redirect()->route('books.index')->with('success', 'Data berhasil dihapus');
         }
 
         $delete->delete();
